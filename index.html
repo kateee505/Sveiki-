@@ -1,15 +1,74 @@
-<input type="text" id="nameInput" placeholder="Ievadi savu vārdu">
-<button onclick="showGreeting()">Sveicināt</button>
-<p id="message"></p>
-function showGreeting() {
-    let userName = document.getElementById("nameInput").value;
-    let message = document.getElementById("message");
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript funkcijas un nosacījumi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
 
-    if (userName === "") {
-        message.style.color = "red";
-        message.innerHTML = "Lūdzu, ievadi savu vārdu!";
-    } else {
-        message.style.color = "green";
-        message.innerHTML = "Sveiks, " + userName + "! Prieks tevi redzēt!";
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sveiciena forma</h2>
+
+    <input type="text" id="nameInput" placeholder="Ievadi savu vārdu">
+    <button onclick="showGreeting()">Sveicināt</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    function showGreeting() {
+        let userName = document.getElementById("nameInput").value;
+        let message = document.getElementById("message");
+
+        if (userName === "") {
+            message.style.color = "red";
+            message.innerHTML = "Lūdzu, ievadi savu vārdu!";
+        } else {
+            message.style.color = "green";
+            message.innerHTML = "Sveiks, " + userName + "! Prieks tevi redzēt!";
+        }
     }
-}
+</script>
+
+</body>
+</html>
