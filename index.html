@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
-    <title>JavaScript funkcijas un nosacījumi</title>
+    <title>Forma ar datu validāciju</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -10,11 +10,11 @@
             padding: 40px;
         }
 
-        .container {
+        .form-container {
             background: white;
-            padding: 20px;
             max-width: 400px;
             margin: auto;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
@@ -38,36 +38,55 @@
             background-color: #0056b3;
         }
 
-        p {
-            margin-top: 15px;
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Sveiciena forma</h2>
+<div class="form-container">
+    <h2>Reģistrācijas forma</h2>
 
-    <input type="text" id="nameInput" placeholder="Ievadi savu vārdu">
-    <button onclick="showGreeting()">Sveicināt</button>
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Vārds">
+        <input type="email" id="email" placeholder="E-pasts">
+        <button type="submit">Iesniegt</button>
+    </form>
 
     <p id="message"></p>
 </div>
 
 <script>
-    function showGreeting() {
-        let userName = document.getElementById("nameInput").value;
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // neļauj formai iesniegties, kamēr validācija nav veikta
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
         let message = document.getElementById("message");
 
-        if (userName === "") {
-            message.style.color = "red";
-            message.innerHTML = "Lūdzu, ievadi savu vārdu!";
-        } else {
-            message.style.color = "green";
-            message.innerHTML = "Sveiks, " + userName + "! Prieks tevi redzēt!";
+        // e-pasta pārbaude
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (name === "" || email === "") {
+            message.className = "error";
+            message.innerHTML = "Lūdzu, aizpildi visus laukus!";
+        } 
+        else if (!emailPattern.test(email)) {
+            message.className = "error";
+            message.innerHTML = "Lūdzu, ievadi pareizu e-pasta adresi!";
+        } 
+        else {
+            message.className = "success";
+            message.innerHTML = "Forma veiksmīgi iesniegta!";
         }
-    }
+    });
 </script>
 
 </body>
